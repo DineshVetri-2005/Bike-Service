@@ -1,0 +1,578 @@
+/* ============================================================
+   RevTune — Design tokens
+   Palette:  graphite bg, tachometer-amber + coolant-teal accents
+   Type:     Rajdhani (display/technical), Inter (UI), JetBrains Mono (data)
+   Signature: gauge/dial motifs + tread-pattern divider
+   ============================================================ */
+
+:root {
+  --bg-deep:      #14171b;
+  --bg-surface:   #1c2024;
+  --bg-elevated:  #23282e;
+  --bg-input:     #191d21;
+
+  --border:       rgba(255,255,255,0.08);
+  --border-soft:  rgba(255,255,255,0.05);
+
+  --amber:        #ff7a33;
+  --amber-dim:    rgba(255,122,51,0.15);
+  --teal:         #3fd6c6;
+  --teal-dim:     rgba(63,214,198,0.15);
+
+  --text-primary: #e9ecef;
+  --text-muted:   #8b93a0;
+  --text-faint:   #565d68;
+
+  --success:      #63e6a0;
+  --danger:       #ff6b6b;
+
+  --font-display: 'Rajdhani', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  --radius: 10px;
+  --radius-sm: 6px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-image:
+    radial-gradient(circle at 15% 0%, rgba(255,122,51,0.06), transparent 40%),
+    radial-gradient(circle at 85% 100%, rgba(63,214,198,0.06), transparent 40%);
+  background-attachment: fixed;
+}
+
+button, input, select {
+  font-family: inherit;
+  color: inherit;
+}
+
+::selection { background: var(--amber-dim); color: var(--text-primary); }
+
+/* ---------- Layout ---------- */
+
+.app {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border);
+  padding: 28px 22px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.main {
+  padding: 36px 44px 60px;
+  max-width: 980px;
+}
+
+/* ---------- Brand + gauge icon ---------- */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 34px;
+}
+
+.gauge-icon { width: 40px; height: 40px; }
+.gauge-ring { fill: none; stroke: var(--border); stroke-width: 5; }
+.gauge-needle { stroke: var(--amber); stroke-width: 4; stroke-linecap: round; }
+.gauge-hub { fill: var(--amber); }
+
+.brand-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+}
+
+.brand-sub {
+  font-size: 11px;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 2px;
+}
+
+/* ---------- Nav ---------- */
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 11px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.nav-idx {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  width: 20px;
+}
+
+.nav-item:hover { background: var(--bg-elevated); color: var(--text-primary); }
+
+.nav-item.active {
+  background: var(--amber-dim);
+  color: var(--amber);
+}
+.nav-item.active .nav-idx { color: var(--amber); }
+
+/* ---------- Session box ---------- */
+
+.session-box {
+  margin-top: 20px;
+  padding: 14px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+}
+
+.session-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-faint);
+  margin-bottom: 4px;
+}
+
+.session-user {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--teal);
+  margin-bottom: 10px;
+  word-break: break-word;
+}
+
+/* ---------- Tread divider (signature detail) ---------- */
+
+.tread {
+  height: 26px;
+  margin-top: 24px;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--border) 0px,
+    var(--border) 2px,
+    transparent 2px,
+    transparent 9px
+  );
+  opacity: 0.5;
+  border-radius: 4px;
+}
+
+/* ---------- Topbar ---------- */
+
+.topbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 20px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+}
+
+.topbar h1 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0.3px;
+}
+
+.api-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 7px 12px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 6px var(--success);
+}
+
+/* ---------- Toast ---------- */
+
+.toast {
+  display: none;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  padding: 11px 16px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 20px;
+  border: 1px solid var(--border);
+}
+.toast.show { display: block; }
+.toast.ok { background: rgba(99,230,160,0.1); color: var(--success); border-color: rgba(99,230,160,0.3); }
+.toast.err { background: rgba(255,107,107,0.1); color: var(--danger); border-color: rgba(255,107,107,0.3); }
+
+/* ---------- Panels ---------- */
+
+.panel { display: none; animation: fadeIn 0.25s ease; }
+.panel.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Hero (dashboard) ---------- */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 30px;
+  align-items: center;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 34px;
+  margin-bottom: 26px;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--amber);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+}
+
+.hero-text h2 {
+  font-family: var(--font-display);
+  font-size: 30px;
+  line-height: 1.2;
+  margin: 0 0 12px;
+  font-weight: 700;
+}
+
+.hero-text p {
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 46ch;
+}
+
+.hero-gauge { text-align: center; }
+.big-gauge { width: 100%; max-width: 220px; }
+.big-gauge-track { fill: none; stroke: var(--border); stroke-width: 10; }
+.big-gauge-fill { fill: none; stroke: var(--amber); stroke-width: 10; stroke-linecap: round; }
+.big-gauge-needle { stroke: var(--teal); stroke-width: 3; stroke-linecap: round; }
+.big-gauge-hub { fill: var(--teal); }
+
+.gauge-caption {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--text-faint);
+  margin-top: -8px;
+}
+
+/* ---------- Stat row ---------- */
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--teal);
+}
+
+.hint {
+  color: var(--text-faint);
+  font-size: 13px;
+}
+
+/* ---------- Grid / cards ---------- */
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.card-head h3 {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+  margin: 0;
+  flex: 1;
+}
+
+.idx {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--bg-deep);
+  background: var(--teal);
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+/* ---------- Forms ---------- */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form.hidden { display: none; }
+
+.form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.form input, .form select {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-size: 14px;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.form input:focus, .form select:focus {
+  border-color: var(--teal);
+}
+
+/* ---------- Buttons ---------- */
+
+.btn-primary, .btn-secondary, .btn-ghost {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 0.1s ease, opacity 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--amber);
+  color: #1a1305;
+  padding: 11px 18px;
+  font-size: 15px;
+  margin-top: 4px;
+}
+.btn-primary:hover { opacity: 0.9; }
+.btn-primary:active { transform: scale(0.98); }
+
+.btn-secondary {
+  background: var(--teal);
+  color: #06201d;
+  padding: 11px 18px;
+  font-size: 15px;
+}
+.btn-secondary:hover { opacity: 0.9; }
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text-muted);
+  padding: 6px 12px;
+  font-size: 12px;
+}
+.btn-ghost:hover { color: var(--text-primary); border-color: var(--teal); }
+.btn-ghost.small { padding: 5px 10px; font-size: 11px; }
+
+.btn-danger-outline {
+  background: transparent;
+  border: 1px solid rgba(255,107,107,0.4);
+  color: var(--danger);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.btn-danger-outline:hover { background: rgba(255,107,107,0.1); }
+
+/* ---------- Lists (bikes / services / bookings) ---------- */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.muted { color: var(--text-faint); font-size: 13px; }
+
+.item-row {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.item-main { min-width: 0; }
+
+.item-title {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+.item-sub {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.item-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.badge-booked { background: var(--teal-dim); color: var(--teal); }
+.badge-progress { background: var(--amber-dim); color: var(--amber); }
+.badge-completed { background: rgba(99,230,160,0.15); color: var(--success); }
+.badge-cancelled { background: rgba(255,107,107,0.15); color: var(--danger); }
+
+.status-select {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 11px;
+  border-radius: 5px;
+  padding: 4px 6px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 880px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar { position: static; border-right: none; border-bottom: 1px solid var(--border); }
+  .main { padding: 26px 20px 50px; }
+  .hero { grid-template-columns: 1fr; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .stat-row { grid-template-columns: 1fr; }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .panel { animation: none; }
+  .btn-primary:active { transform: none; }
+}
+
+/* ---------- Focus visibility ---------- */
+
+button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}

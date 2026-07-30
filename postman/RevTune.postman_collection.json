@@ -1,0 +1,274 @@
+{
+  "info": {
+    "name": "RevTune API",
+    "description": "RevTune - Bike Service Booking Management System. Sample requests for all endpoints.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "userId", "value": "1" },
+    { "key": "bikeId", "value": "1" },
+    { "key": "serviceId", "value": "1" },
+    { "key": "bookingId", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Arun Kumar\",\n  \"email\": \"arun.kumar@example.com\",\n  \"phone\": \"9876543210\",\n  \"password\": \"secret123\",\n  \"address\": \"12 Anna Nagar, Chennai\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/users/register", "host": ["{{baseUrl}}"], "path": ["api", "users", "register"] }
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "body": "{\n  \"id\": 1,\n  \"name\": \"Arun Kumar\",\n  \"email\": \"arun.kumar@example.com\",\n  \"phone\": \"9876543210\",\n  \"address\": \"12 Anna Nagar, Chennai\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"arun.kumar@example.com\",\n  \"password\": \"secret123\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/users/login", "host": ["{{baseUrl}}"], "path": ["api", "users", "login"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "body": "{\n  \"userId\": 1,\n  \"name\": \"Arun Kumar\",\n  \"email\": \"arun.kumar@example.com\",\n  \"message\": \"Login successful\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get User Profile",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/users/{{userId}}", "host": ["{{baseUrl}}"], "path": ["api", "users", "{{userId}}"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "body": "{\n  \"id\": 1,\n  \"name\": \"Arun Kumar\",\n  \"email\": \"arun.kumar@example.com\",\n  \"phone\": \"9876543210\",\n  \"address\": \"12 Anna Nagar, Chennai\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Arun Kumar S\",\n  \"email\": \"arun.kumar@example.com\",\n  \"phone\": \"9876543210\",\n  \"password\": \"secret123\",\n  \"address\": \"45 T Nagar, Chennai\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/users/{{userId}}", "host": ["{{baseUrl}}"], "path": ["api", "users", "{{userId}}"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "body": "{\n  \"id\": 1,\n  \"name\": \"Arun Kumar S\",\n  \"email\": \"arun.kumar@example.com\",\n  \"phone\": \"9876543210\",\n  \"address\": \"45 T Nagar, Chennai\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bike",
+      "item": [
+        {
+          "name": "Add Bike",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": 1,\n  \"bikeNumber\": \"TN22AB1234\",\n  \"brand\": \"Royal Enfield\",\n  \"model\": \"Classic 350\",\n  \"bikeType\": \"Cruiser\",\n  \"manufacturingYear\": 2022\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/bikes", "host": ["{{baseUrl}}"], "path": ["api", "bikes"] }
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "body": "{\n  \"id\": 1,\n  \"userId\": 1,\n  \"bikeNumber\": \"TN22AB1234\",\n  \"brand\": \"Royal Enfield\",\n  \"model\": \"Classic 350\",\n  \"bikeType\": \"Cruiser\",\n  \"manufacturingYear\": 2022\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Bikes By User",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/bikes/user/{{userId}}", "host": ["{{baseUrl}}"], "path": ["api", "bikes", "user", "{{userId}}"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "body": "[\n  {\n    \"id\": 1,\n    \"userId\": 1,\n    \"bikeNumber\": \"TN22AB1234\",\n    \"brand\": \"Royal Enfield\",\n    \"model\": \"Classic 350\",\n    \"bikeType\": \"Cruiser\",\n    \"manufacturingYear\": 2022\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Update Bike",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": 1,\n  \"bikeNumber\": \"TN22AB1234\",\n  \"brand\": \"Royal Enfield\",\n  \"model\": \"Classic 350\",\n  \"bikeType\": \"Cruiser\",\n  \"manufacturingYear\": 2023\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/bikes/{{bikeId}}", "host": ["{{baseUrl}}"], "path": ["api", "bikes", "{{bikeId}}"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "body": "{\n  \"id\": 1,\n  \"userId\": 1,\n  \"bikeNumber\": \"TN22AB1234\",\n  \"brand\": \"Royal Enfield\",\n  \"model\": \"Classic 350\",\n  \"bikeType\": \"Cruiser\",\n  \"manufacturingYear\": 2023\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete Bike",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/api/bikes/{{bikeId}}", "host": ["{{baseUrl}}"], "path": ["api", "bikes", "{{bikeId}}"] }
+          },
+          "response": [ { "name": "204 No Content", "body": "" } ]
+        }
+      ]
+    },
+    {
+      "name": "Service",
+      "item": [
+        {
+          "name": "Create Service",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"serviceName\": \"Engine Oil Change\",\n  \"description\": \"Replace engine oil and filter\",\n  \"price\": 350.0,\n  \"estimatedTime\": \"30 mins\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/services", "host": ["{{baseUrl}}"], "path": ["api", "services"] }
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "body": "{\n  \"id\": 1,\n  \"serviceName\": \"Engine Oil Change\",\n  \"description\": \"Replace engine oil and filter\",\n  \"price\": 350.0,\n  \"estimatedTime\": \"30 mins\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get All Services",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/services", "host": ["{{baseUrl}}"], "path": ["api", "services"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "body": "[\n  { \"id\": 1, \"serviceName\": \"Engine Oil Change\", \"description\": \"Replace engine oil and filter\", \"price\": 350.0, \"estimatedTime\": \"30 mins\" },\n  { \"id\": 2, \"serviceName\": \"General Service\", \"description\": \"Full bike checkup and tune-up\", \"price\": 600.0, \"estimatedTime\": \"2 hours\" }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Get Service By Id",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/services/{{serviceId}}", "host": ["{{baseUrl}}"], "path": ["api", "services", "{{serviceId}}"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "body": "{\n  \"id\": 1,\n  \"serviceName\": \"Engine Oil Change\",\n  \"description\": \"Replace engine oil and filter\",\n  \"price\": 350.0,\n  \"estimatedTime\": \"30 mins\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Booking",
+      "item": [
+        {
+          "name": "Create Booking",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": 1,\n  \"bikeId\": 1,\n  \"serviceId\": 1,\n  \"bookingDate\": \"2026-08-05\",\n  \"bookingTime\": \"10:30:00\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/bookings", "host": ["{{baseUrl}}"], "path": ["api", "bookings"] }
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "body": "{\n  \"id\": 1,\n  \"userId\": 1,\n  \"bikeId\": 1,\n  \"serviceId\": 1,\n  \"bookingDate\": \"2026-08-05\",\n  \"bookingTime\": \"10:30:00\",\n  \"status\": \"BOOKED\",\n  \"totalAmount\": 350.0\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Bookings By User",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/bookings/user/{{userId}}", "host": ["{{baseUrl}}"], "path": ["api", "bookings", "user", "{{userId}}"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "body": "[\n  {\n    \"id\": 1,\n    \"userId\": 1,\n    \"bikeId\": 1,\n    \"serviceId\": 1,\n    \"bookingDate\": \"2026-08-05\",\n    \"bookingTime\": \"10:30:00\",\n    \"status\": \"BOOKED\",\n    \"totalAmount\": 350.0\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Get Booking By Id",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/bookings/{{bookingId}}", "host": ["{{baseUrl}}"], "path": ["api", "bookings", "{{bookingId}}"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "body": "{\n  \"id\": 1,\n  \"userId\": 1,\n  \"bikeId\": 1,\n  \"serviceId\": 1,\n  \"bookingDate\": \"2026-08-05\",\n  \"bookingTime\": \"10:30:00\",\n  \"status\": \"BOOKED\",\n  \"totalAmount\": 350.0\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Booking Status",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"IN_PROGRESS\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/bookings/{{bookingId}}/status", "host": ["{{baseUrl}}"], "path": ["api", "bookings", "{{bookingId}}", "status"] }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "body": "{\n  \"id\": 1,\n  \"userId\": 1,\n  \"bikeId\": 1,\n  \"serviceId\": 1,\n  \"bookingDate\": \"2026-08-05\",\n  \"bookingTime\": \"10:30:00\",\n  \"status\": \"IN_PROGRESS\",\n  \"totalAmount\": 350.0\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete Booking",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/api/bookings/{{bookingId}}", "host": ["{{baseUrl}}"], "path": ["api", "bookings", "{{bookingId}}"] }
+          },
+          "response": [ { "name": "204 No Content", "body": "" } ]
+        }
+      ]
+    }
+  ]
+}
